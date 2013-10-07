@@ -1,3 +1,18 @@
+apply plugin: 'java'
+
 task wrapper(type: Wrapper) {
   gradleVersion = '1.8'
+}
+
+task execJava(type: JavaExec) {
+  classpath = sourceSets.main.runtimeClasspath
+  main = "Sample"
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testCompile 'junit:junit:4.10'
 }
