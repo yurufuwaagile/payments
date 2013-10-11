@@ -1,4 +1,15 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  
+  dependencies {
+    classpath "net.saliman:gradle-cobertura-plugin:2.0.0"
+  }
+}
+
 apply plugin: 'java'
+apply plugin: 'cobertura'
 
 task wrapper(type: Wrapper) {
   gradleVersion = '1.8'
