@@ -5,6 +5,6 @@ import org.junit.Test;
 public class SampleTest {
     @Test
     public void test() throws Exception {
-	assertThat(1 + 1, is(3));
+	assertThat(1 + 1, is(2));
     }
 }
