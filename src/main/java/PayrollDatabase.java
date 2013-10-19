@@ -8,11 +8,15 @@ public class PayrollDatabase {
         itsEmployees.put(empId, e);
     }
 
-    public static Employee GetEmployee(int empId) {
-        return new Employee();
+    public static Employee getEmployee(int empId) {
+        return itsEmployees.get(empId);
     }
 
     public static void Clear() {
         itsEmployees.clear();
+    }
+
+    public static void deleteEmployee(int itsEmpId) {
+        itsEmployees.remove(itsEmpId);
     }
 }

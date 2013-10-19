@@ -6,7 +6,13 @@
  * To change this template use File | Settings | File Templates.
  */
 public class SalariedClassification extends PaymentClassification {
+    private double itsSalary;
+
+    public SalariedClassification(double salary) {
+        itsSalary = salary;
+    }
+
     public Double getSalary() {
-        return 0.0;
+        return itsSalary;
     }
 }

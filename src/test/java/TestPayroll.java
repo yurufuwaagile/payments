@@ -1,8 +1,7 @@
-import com.sun.istack.internal.NotNull;
-import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -13,7 +12,7 @@ public class TestPayroll {
         AddSalariedEmployee t = new AddSalariedEmployee(empId, "Bob", "Home", 1000.00);
         t.execute();
 
-        Employee e = PayrollDatabase.GetEmployee(empId);
+        Employee e = PayrollDatabase.getEmployee(empId);
 
         assertThat(e, is(notNullValue()));
         assertThat(e.getName(), is("Bob"));
@@ -33,5 +32,22 @@ public class TestPayroll {
         HoldMethod hm = (HoldMethod) pm;
         assertThat(hm, is(notNullValue()));
     }
+
+    @Test
+    public void testDeleteEmployee() {
+        int empId = 3;
+        AddCommissionedEmployee t = new AddCommissionedEmployee(empId, "Lance", "Home", 2500, 3.2);
+        t.execute();
+        Employee e = PayrollDatabase.getEmployee(empId);
+        assertThat(e, is(notNullValue()));
+
+        DeleteEmployeeTransaction dt = new DeleteEmployeeTransaction(empId);
+        dt.execute();
+
+        e = PayrollDatabase.getEmployee(empId);
+        assertThat(e, is(nullValue()));
+
+    }
+
 
 }
