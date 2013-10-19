@@ -1,3 +1,4 @@
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -49,5 +50,23 @@ public class TestPayroll {
 
     }
 
+    @Test
+    public void testTimeCardTransaction() {
+        int empId = 2;
+
+        AddHourlyEmployee t = new AddHourlyEmployee(empId, "Bill", "Home", 15.25);
+        t.execute();
+        TimeCardTransaction tct = new TimeCardTransaction(20011031, 8.0, empId);
+        tct.execute();
+
+        Employee e = PayrollDatabase.getEmployee(empId);
+        assertThat(e, is(notNullValue()));
+        PaymentClassification pc = e.getClassification();
+        HourlyClassification hc = (HourlyClassification) pc;
+        TimeCard tc = hc.getTimeCard(20011031);
+        assertThat(tc, is(notNullValue()));
+        assertThat(tc.getHours(), is(8.0));
+
+    }
 
 }
